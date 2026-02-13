@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Forever 💖</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e6b8ad;
+    font-family: "Poppins", sans-serif;
+}
+
+.card {
+    width: 420px;
+    background: #f2f2f2;
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+h1 {
+    color: #ff4b7d;
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.yes {
+    background: #ff4b7d;
+    color: white;
+}
+
+.no {
+    background: #ddd;
+}
+
+.hidden {
+    display: none;
+}
+
+.message {
+    margin-top: 15px;
+    color: #ff4b7d;
+}
+
+.next-btn {
+    background: #ff4b7d;
+    color: white;
+}
+
+.heart {
+    position: fixed;
+    color: #ff4b7d;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<!-- Step 1 -->
+<div id="step1">
+    <h1>Are you a magician? ✨</h1>
+    <button class="yes" onclick="showParagraph()">Yes 💖</button>
+    <button class="no" onclick="showEmotion()">No 🙈</button>
+    <div id="emotionMsg" class="message"></div>
+</div>
+
+<!-- Step 2 Paragraph -->
+<div id="paragraph" class="hidden">
+    <h1>Because whenever I look at you… everyone else disappears 🥹✨</h1>
+
+    <p>
+    You are the most supportive, patient, loving soul I’ve ever known ❤️<br><br>
+    The way you stay by my side, protect me, and believe in me makes me feel so safe 🫶<br><br>
+    Your eyes… oh my God your eyes 🥹 they shine like they’re hiding an entire universe just for me ✨<br><br>
+    When you gently slide your hand across my face, everything slows down… and my heart melts completely 💕<br><br>
+    I feel so lucky to love you. So lucky to be yours. So lucky that out of everyone… you chose me 💗<br><br>
+    You are my comfort, my peace, my chaos, my happiness, my forever 💖<br><br>
+    I love you more than words could ever explain… and I’ll keep loving you every single day 💋💋💋
+    </p>
+
+    <button class="next-btn" onclick="showFinal()">Next 💘</button>
+</div>
+
+<!-- Step 3 Final Question -->
+<div id="final" class="hidden">
+    <h1 id="finalTitle">
+        Will you be my Valentine forever and ever? 💍💖
+    </h1>
+
+    <div style="margin-top:20px; position:relative; height:120px;">
+        <button class="yes" id="yesBtn">YESSSS 💋</button>
+        <button class="no" id="noBtn">No 🙈</button>
+    </div>
+
+    <p id="funnyMsg" style="color:#ff4b7d; margin-top:15px;"></p>
+</div>
+
+
+</div>
+
+
+<script>
+
+function showEmotion() {
+    document.getElementById("emotionMsg").innerText =
+    "No? 🥺 That hurts my tiny heart… please click Yes 😭💔";
+}
+
+function showParagraph() {
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("paragraph").classList.remove("hidden");
+}
+
+function showFinal() {
+    document.getElementById("paragraph").classList.add("hidden");
+    document.getElementById("final").classList.remove("hidden");
+}
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const funnyMsg = document.getElementById("funnyMsg");
+
+let noClicks = 0;
+
+yesBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 250 - 125;
+    const y = Math.random() * 150 - 75;
+    yesBtn.style.position = "absolute";
+    yesBtn.style.left = 150 + x + "px";
+    yesBtn.style.top = 40 + y + "px";
+});
+
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.transform = "scale(1.2)";
+});
+
+noBtn.addEventListener("mouseout", () => {
+    noBtn.style.transform = "scale(1)";
+});
+
+noBtn.addEventListener("click", () => {
+
+    noClicks++;
+
+    if (noClicks === 1) {
+        funnyMsg.innerText = "Excuse me?? 🤨 Try again.";
+    } 
+    else if (noClicks === 2) {
+        funnyMsg.innerText = "Are you sure about that?? 😤";
+        noBtn.style.animation = "shake 0.3s";
+    } 
+    else if (noClicks === 3) {
+        funnyMsg.innerText = "Okay that's illegal. You HAVE to say yes 😭💖";
+        noBtn.innerText = "Fine YES 😭💖";
+        noBtn.classList.remove("no");
+        noBtn.classList.add("yes");
+    } 
+    else {
+        bigLoveEnding();
+    }
+});
+
+function bigLoveEnding() {
+    document.querySelector(".card").innerHTML =
+    "<h1 style='color:#ff4b7d; font-size:32px;'>I KNEW ITTT 😭💖</h1>" +
+    "<p style='font-size:20px;'>You are stuck with me forever 😌💋💋💋</p>" +
+    "<h2>I LOVE YOUUUUUU 💖💖💖</h2>";
+    createHearts();
+}
+
+function createHearts() {
+    for (let i = 0; i < 60; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 25 + 15 + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }
+}
+</script>
+
+</body>
+</html>
